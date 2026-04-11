@@ -85,7 +85,7 @@ DeliverySchedulingSystem/
 │   │   ├── AbstractDeliveryStrategy.java
 │   │   ├── GreedyAlgorithm.java
 │   │   ├── TaskPriorityAlgorithm.java
-│   │   ├── DynamicProgrammingAlgorithm.java
+│   │   ├── DPAlgorithm.java
 │   │   └── EDFAlgorithm.java
 │   │
 │   ├── view/
