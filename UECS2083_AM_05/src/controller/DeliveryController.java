@@ -107,7 +107,6 @@ public class DeliveryController {
             String option = scanner.nextLine().trim().toUpperCase();
             switch (option) {
 	    	case "1":
-	    		// selected (highest/lowest/average profit/deadline analysis/)
 	    		view.displaySelectedSequence(strategy.getSelected());
 	    		System.out.println("Press any key to return...");
 	    		scanner.nextLine();
@@ -120,8 +119,6 @@ public class DeliveryController {
 	    		break;
 	    	case "3":
 	    		view.printSummary(strategy, deliveries);
-	    		System.out.println("Press any key to return.................");
-	    		// summary (total jobs/ selected/unselected job/missed deadline/profit earned/loss/average profit per job/...)
 	    		System.out.println("Press any key to return...");
 	    		scanner.nextLine();
 	    		break;
