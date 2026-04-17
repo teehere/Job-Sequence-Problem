@@ -2,6 +2,8 @@ package view;
 
 // import from defined package
 import model.Delivery;
+import strategy.AbstractDeliveryStrategy;
+
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 
@@ -29,7 +31,7 @@ public class DisplayView {
 		System.out.println(" ".repeat(16) + "SELECT ALGORITHMS");
 		System.out.println("=".repeat(50));
 		System.out.println("<1> ");
-		System.out.println("<2> ");
+		System.out.println("<2> Greedy Algorithm");
 		System.out.println("<3> Dynamic Programming Algorithm(DP)");
 		System.out.println("<4> Earliest Deadline First Algorithm (EDF)");
 		System.out.println("<Q> Quit");
@@ -71,7 +73,7 @@ public class DisplayView {
         System.out.println("-".repeat(130));
         
         for (Delivery d : deliveries) {
-            System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10d | %-15d | %-8d\n",
+            System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
                 d.getDeliveryId(),
                 d.getItem(),
                 d.getOrderDate().format(fmt), 
@@ -93,9 +95,9 @@ public class DisplayView {
 	    		"DeliveryID", "Item", "Order Date", "Deadline", "Sales(RM)", "Quantity(unit)", "Profit(RM)");
 	    System.out.println("-".repeat(130));
 	   
-	    int total = 0;
+	    double total = 0;
 	    for (Delivery d : selected) {	        
-	        System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10d | %-15d | %-8d\n",
+	        System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
 	                d.getDeliveryId(),
 	                d.getItem(),
 	        		d.getOrderDate().format(fmt),
@@ -108,7 +110,91 @@ public class DisplayView {
 	    }
 	
 	    System.out.println("=".repeat(130));
-	    System.out.println("TOTAL PROFIT: " + total);
+	    System.out.printf("TOTAL PROFIT: %.2f\n", total);
 
     }
+    
+	// display summary
+ 	public void printSummary(AbstractDeliveryStrategy<Delivery> strategy, List<Delivery> delivery) {
+
+ 		//List<Delivery> delivery = strategy.getDelivery();
+ 		List<Delivery> selected = strategy.getSelected();
+ 		List<Delivery> unselected = strategy.getUnselected();
+ 		
+ 		int totalJobsCnt = delivery.size(); // total jobs count
+ 		int selectedJobsCnt = selected.size();
+ 		int unselectedJobsCnt = unselected.size();
+
+ 		// profit analysis
+ 		double totalProfit = strategy.getTotalProfit();
+ 		double totalPossibleProfit = delivery.stream()
+ 				.mapToDouble(Delivery::getProfit)
+ 				.sum();
+ 		double profitLost = totalPossibleProfit - totalProfit;
+ 		double totalPotentialProfit = totalProfit + profitLost;
+
+ 		// average profit
+ 		double avgProfitSelected = selectedJobsCnt == 0 ? 0 : totalProfit / selectedJobsCnt;
+ 		double avgProfitAll = totalJobsCnt == 0 ? 0 :totalPossibleProfit / totalJobsCnt;
+
+ 		// selected & unselected rate
+ 		double selectedRate = totalJobsCnt == 0 ? 0 : (double) selectedJobsCnt / totalJobsCnt * 100;
+ 		double unselectedRate = totalJobsCnt == 0 ? 0 : (double) unselectedJobsCnt / totalJobsCnt * 100;
+
+ 		// print output to user
+ 		System.out.println("=".repeat(50));
+ 		System.out.println(" ".repeat(13) + "DELIVERY SUMMARY");
+ 		System.out.println("=".repeat(50));
+
+ 		System.out.println("Total Deliveries       : " + totalJobsCnt);
+ 		System.out.printf("Selected Deliveries    : %-2d (%.2f%%)\n", selectedJobsCnt, selectedRate);
+ 		System.out.printf("Unselected Deliveries  : %-2d (%.2f%%)\n", unselectedJobsCnt, unselectedRate);
+
+ 		System.out.println("\n--------- PROFIT ANALYSIS ----------");
+ 		System.out.printf("Profit Earned                   : %.2f\n", totalProfit);
+ 		System.out.printf("Profit Lost                     : %.2f\n", profitLost);
+ 		System.out.printf("Total Potential Profit          : %.2f\n", totalPotentialProfit);
+ 		System.out.printf("Avg Profit (Selected Deliveries): %.2f\n", avgProfitSelected);
+ 		System.out.printf("Avg Profit (All Deliveries)     : %.2f\n", avgProfitAll);
+
+ 		System.out.println("\n------- SELECTED DELIVERIES --------");
+ 		System.out.printf("%-12s | %-15s | %-18s | %-24s | %-10s | %-15s | %-8s\n",
+ 				"DeliveryID", "Item", "Order Date", "Deadline", "Sales(RM)", "Quantity(unit)", "Profit(RM)");
+ 		System.out.println("-".repeat(130));
+
+ 		for (Delivery d : selected) {
+ 			System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
+ 					d.getDeliveryId(),
+ 					d.getItem(),
+ 					d.getOrderDate().format(fmt),
+ 					d.getDeadlineDate().format(fmt),
+ 					d.getDeadline(), // day difference
+ 					d.getSales(),
+ 					d.getQuantity(),
+ 					d.getProfit());
+ 		}
+
+ 		System.out.println("=".repeat(130));
+ 		System.out.printf("TOTAL PROFIT: %.2f\n", totalProfit);
+
+ 		System.out.println("\n------- UNSELECTED DELIVERIES -------");
+ 		System.out.printf("%-12s | %-15s | %-18s | %-24s | %-10s | %-15s | %-8s\n",
+ 				"DeliveryID", "Item", "Order Date", "Deadline", "Sales(RM)", "Quantity(unit)", "Profit(RM)");
+ 		System.out.println("-".repeat(130));
+
+ 		for (Delivery d : unselected) {
+ 			System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
+ 					d.getDeliveryId(),
+ 					d.getItem(),
+ 					d.getOrderDate().format(fmt),
+ 					d.getDeadlineDate().format(fmt),
+ 					d.getDeadline(), // day difference
+ 					d.getSales(),
+ 					d.getQuantity(),
+ 					d.getProfit());
+ 		}
+
+ 		System.out.println("=".repeat(130));
+ 		System.out.printf("TOTAL PROFIT LOST: %.2f\n", profitLost);
+ 	}
 }

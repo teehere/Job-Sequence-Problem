@@ -10,11 +10,11 @@ public class Delivery {
 	private String item;
 	private LocalDate orderDate;
 	private LocalDate deadline;
-	private int sales;
+	private double sales;
 	private int quantity;
-	private int profit;
+	private double profit;
 	
-	public Delivery(String deliveryId, String item, LocalDate orderDate, LocalDate deadline, int sales, int quantity, int profit) {
+	public Delivery(String deliveryId, String item, LocalDate orderDate, LocalDate deadline, double sales, int quantity, double profit) {
 		this.deliveryId = deliveryId;
 		this.item = item;
         this.orderDate = orderDate;
@@ -29,9 +29,9 @@ public class Delivery {
 	public String getItem() {return item;}
 	public LocalDate getOrderDate() {return orderDate;}
 	public LocalDate getDeadlineDate() {return deadline;}
-	public int getSales() {return sales;}
+	public double getSales() {return sales;}
 	public int getQuantity() {return quantity;}
-	public int getProfit() {return profit;}
+	public double getProfit() {return profit;}
 	
 	// to get days difference (slot)
 	public int getDeadline() {

@@ -15,15 +15,15 @@ public class RandomGenerator {
 		
 		for (int i=1; i<=n; i++) {
 			            
-			// pick random item and city
+			// pick random item
 			String item = items.get(ran.nextInt(items.size()));
             
             // random generate   
             LocalDate orderDate = LocalDate.now();
 			LocalDate deadline = orderDate.plusDays(ran.nextInt(5) + 1); // 1 to 5 days
-			int sales = ran.nextInt(100)+1;
+			double sales = ran.nextInt(100)+1;
 			int quantity = ran.nextInt(30)+1;
-			int profit = sales*quantity;
+			double profit = sales*quantity;
 			deliveryList.add(new Delivery("Order#" + i, item, orderDate, deadline, sales, quantity, profit));
 		}
 		return deliveryList;

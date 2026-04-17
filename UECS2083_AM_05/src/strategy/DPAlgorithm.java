@@ -6,6 +6,7 @@ public class DPAlgorithm extends AbstractDeliveryStrategy<Delivery>{
 	public DPAlgorithm(List<Delivery> delivery) {
 		super(delivery);
 	}
+	
 	//n = number of job, D = maxDeadline
 	@Override
 	public void schedule(List<Delivery> deliveries) {
@@ -25,7 +26,7 @@ public class DPAlgorithm extends AbstractDeliveryStrategy<Delivery>{
 		
 		//DP table -> dp[i][t] = maximum profit using first i jobs in t slots
 		//O(n*D) - loop over n jobs and D time slot
-		int [][] dp = new int[n+1][maxDeadline + 1];
+		double [][] dp = new double[n+1][maxDeadline + 1];
 		
 		//reconstruct track option
 		//O(n*D)
@@ -38,7 +39,7 @@ public class DPAlgorithm extends AbstractDeliveryStrategy<Delivery>{
 			//get job detail
 			//O(1)
 			Delivery d = deliveries.get(i-1);
-			int profit = d.getProfit();
+			double profit = d.getProfit();
 			int deadline = d.getDeadline();
 			
 			//loop through time slot
@@ -53,7 +54,7 @@ public class DPAlgorithm extends AbstractDeliveryStrategy<Delivery>{
 				//O(1)
 				if(t <= deadline && t > 0) {
 					//compute profit if take the job and 1 slot is use
-					int newProfit = dp[i-1][t-1] + profit;
+					double newProfit = dp[i-1][t-1] + profit;
 					
 					//compare profit
 					if(newProfit > dp[i][t]) {

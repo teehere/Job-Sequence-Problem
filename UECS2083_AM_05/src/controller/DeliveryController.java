@@ -30,21 +30,30 @@ public class DeliveryController {
     }
     
     private void loadData() {
-        while (true) {
+        while (true) { // to return to here when case 5 under showResults
             view.showMainMenu();
             String option = scanner.nextLine().trim().toUpperCase();
             
             if (option.equals("1")) {
 				deliveries = FileLoader.load("src/delivery.txt");
+				
 				source = "File Loader";
 				break;
 				
 			} else if (option.equals("2")) {
 				System.out.print("Enter Numbers of Deliveries: ");
-				int nums = Integer.parseInt(scanner.nextLine()); // scanner.nextLine() make it consistent, avoid \n buffer
-				deliveries = RandomGenerator.generate(nums);
-				source = "Random Generator";
-				break;
+				try {// negative value check
+					int nums = Integer.parseInt(scanner.nextLine()); // scanner.nextLine() make it consistent, avoid \n buffer
+					if(nums <= 0) {
+						System.out.println("Number must be greater than 0!");
+						continue;
+					}
+					deliveries = RandomGenerator.generate(nums);
+					source = "Random Generator";
+					break;
+				} catch(NumberFormatException e) {
+					System.out.println("Invalid number! Please enter digits only.");
+				}
 				
 			} else if (option.equals("Q")) {
 				System.exit(0);
@@ -56,14 +65,16 @@ public class DeliveryController {
     }
     
     private void runAlgorithm() {
-        AbstractDeliveryStrategy<Delivery> strategy = selectAlgorithm();
-        
-        // get execution time (ms)
-        long start = System.currentTimeMillis();
-        strategy.schedule(deliveries);
-        long end = System.currentTimeMillis();
-        
-        showResults(strategy, end - start);
+    	while(true) {
+	        AbstractDeliveryStrategy<Delivery> strategy = selectAlgorithm();
+	        
+	        // get execution time (ms)
+	        long start = System.currentTimeMillis();
+	        strategy.schedule(deliveries);
+	        long end = System.currentTimeMillis();
+	        
+	        showResults(strategy, end - start);
+    	}
     }
     
     private AbstractDeliveryStrategy<Delivery> selectAlgorithm() {
@@ -75,7 +86,7 @@ public class DeliveryController {
 			case "1":
 				// new catherine(delivery);
 			case "2":
-				// new evelyn(delivery);
+				return new GreedyAlgorithm(deliveries);
 			case "3":
 				return new DPAlgorithm(deliveries);
 			case "4":
@@ -98,16 +109,24 @@ public class DeliveryController {
 	    	case "1":
 	    		// selected (highest/lowest/average profit/deadline analysis/)
 	    		view.displaySelectedSequence(strategy.getSelected());
+	    		System.out.println("Press any key to return.................");
+	    		scanner.nextLine();
 	    		return;
 	    	case "2":
 	    		// unselected (potential profit lost/reason why unselected/suggestion/deadline analysis...)
+	    		System.out.println("Press any key to return.................");
+	    		scanner.nextLine();
 	    	case "3":
-	    		// summary (total jobs/ selected/unselected job/missed deadline/profit earned/loss/average profit per job/...)
+	    		view.printSummary(strategy, deliveries);
+	    		System.out.println("Press any key to return.................");
+	    		scanner.nextLine();
 	    	case "4":
 	    		// comparison
+	    		System.out.println("Press any key to return.................");
+	    		scanner.nextLine();
 	    	case "5":
-	    		System.out.println("Returning to Previous Menu"); // error !!!!!!!!!!!!
-                break;
+	    		System.out.println("Returning to Previous Menu");
+                return;
 	    	default:
 	    		System.out.println("Invalid Option, Please Try Again!");
             }

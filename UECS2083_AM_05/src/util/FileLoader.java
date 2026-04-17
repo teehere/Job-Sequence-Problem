@@ -25,9 +25,9 @@ public class FileLoader {
 	                String item = part[1].trim();
 	                LocalDate orderDate = LocalDate.parse(part[2].trim(), fmt);
 	                LocalDate deadline = LocalDate.parse(part[3].trim(), fmt);
-	                int sales = Integer.parseInt(part[4].trim());
+	                double sales = Double.parseDouble(part[4].trim());
 	                int quantity = Integer.parseInt(part[5].trim());
-	                int profit = Integer.parseInt(part[6].trim());
+	                double profit = Double.parseDouble(part[6].trim());
 	                
 	                deliveryList.add(new Delivery(id, item, orderDate, deadline, sales, quantity, profit));
                 }

@@ -2,6 +2,7 @@
 
 ## Overview
 This project implements a **Delivery Scheduling System** that solves the **Job Sequencing Problem** for an e-commerce/logistics company. <br />
+
 The system helps decide which delivery orders to accept and in what sequence to maximize total profit while ensuring all scheduled deliveries meet their deadlines, by appling different scheduling algorithms to optimize delivery selection.
 
 ## Problem Statement
@@ -85,7 +86,7 @@ DeliverySchedulingSystem/
 │   │   ├── AbstractDeliveryStrategy.java
 │   │   ├── GreedyAlgorithm.java
 │   │   ├── TaskPriorityAlgorithm.java
-│   │   ├── DynamicProgrammingAlgorithm.java
+│   │   ├── DPAlgorithm.java
 │   │   └── EDFAlgorithm.java
 │   │
 │   ├── view/

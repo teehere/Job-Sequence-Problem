@@ -2,20 +2,22 @@ package strategy;
 
 import java.util.*;
 
+//import model.Delivery;
+
 public abstract class AbstractDeliveryStrategy<E> implements DeliveryStrategy<E> {
 	protected List<E> delivery; // main storage
 	protected List<E> selected = new ArrayList<>(); // selected job
 	protected List<E> unselected = new ArrayList<>(); // rejected job
-	protected int totalProfit = 0;
+	protected double totalProfit = 0;
 	 
 	public AbstractDeliveryStrategy(List<E> delivery) {
 		this.delivery = delivery;
 	}
 	
+	public List<E> getDelivery() {return delivery;}
 	public List<E> getSelected() {return selected;}
     public List<E> getUnselected() {return unselected;}
-    public int getTotalProfit() {return totalProfit;}
-	    
+    public double getTotalProfit() {return totalProfit;}	    
 }
 
 /*
