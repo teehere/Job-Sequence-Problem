@@ -42,6 +42,6 @@ public class EDFAlgorithm extends AbstractDeliveryStrategy<Delivery> {
             } 
         }
        
-        // Total Time Complexity: O(n log n) + O(n log n) = O(n log n)
+        // Total Time Complexity: O(n log n)
     }
 }
