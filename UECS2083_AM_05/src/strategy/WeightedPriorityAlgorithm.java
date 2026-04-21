@@ -47,7 +47,7 @@ public class WeightedPriorityAlgorithm extends AbstractDeliveryStrategy<Delivery
         while (!pq.isEmpty()) {
             Delivery d = pq.poll();
 
-            //to assign a delivery job to the latest avaiable slot within its deadline
+            //to assign a delivery job to the latest available slot within its deadline
             boolean placed = false;
 
             for (int t = d.getDeadline(); t >= 1; t--) {
