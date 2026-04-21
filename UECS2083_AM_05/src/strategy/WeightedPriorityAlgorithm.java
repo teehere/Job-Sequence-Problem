@@ -3,9 +3,9 @@ package strategy;
 import java.util.*;
 import model.Delivery;
 
-public class WeightedPriorityAlgorithm extends AbstractDeliveryStrategy<Delivery> {
+public class TPS(Weighted)Algorithm extends AbstractDeliveryStrategy<Delivery> {
 
-    public WeightedPriorityAlgorithm(List<Delivery> delivery) {
+    public TPS(Weighted)Algorithm(List<Delivery> delivery) {
         super(delivery); 
     }
 
