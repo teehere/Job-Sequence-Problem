@@ -35,7 +35,7 @@ import java.time.format.DateTimeFormatter;
 		System.out.println("=".repeat(50));
 		System.out.println(" ".repeat(16) + "SELECT ALGORITHMS");
 		System.out.println("=".repeat(50));
-		System.out.println("<1> ");
+		System.out.println("<1> Task Priority Scheduling (Weighted) Algorithm");
 		System.out.println("<2> Greedy Algorithm");
 		System.out.println("<3> Dynamic Programming Algorithm(DP)");
 		System.out.println("<4> Earliest Deadline First Algorithm (EDF)");
