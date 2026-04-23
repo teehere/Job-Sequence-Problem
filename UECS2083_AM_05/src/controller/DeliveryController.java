@@ -86,7 +86,7 @@ public class DeliveryController {
             
             switch (option) {
 			case "1":
-				return new TPSWeightedAlgorithm(delveries);
+				return new TPSWeightedAlgorithm(deliveries);
 			case "2":
 				return new GreedyAlgorithm(deliveries);
 			case "3":
@@ -96,7 +96,8 @@ public class DeliveryController {
 			case "Q":
 				System.exit(0);;
 			default:
-				System.out.println("Invalid Option, Please Try Again!");
+			    System.out.println("Invalid Option! Please Enter a Number (1-5)");
+				scanner.nextLine();
             }
         }
     }
@@ -110,31 +111,32 @@ public class DeliveryController {
             switch (option) {
 	    	case "1":
 	    		view.displaySelectedSequence(strategy.getSelected());
-	    		System.out.println("Press any key to return...");
+	    		System.out.println("Press enter to return...");
 	    		scanner.nextLine();
 	    		break;
 
 	    	case "2":
 	    		view.displayUnselectedSequence(strategy.getUnselected());
-	    		System.out.println("Press any key to return...");
+	    		System.out.println("Press enter to return...");
 	    		scanner.nextLine();
 	    		break;
 	    	case "3":
 	    		view.printSummary(strategy, deliveries);
-	    		System.out.println("Press any key to return...");
+	    		System.out.println("Press enter to return...");
 	    		scanner.nextLine();
 	    		break;
 	    	case "4":
-	    		// comparison
 	    		view.compareAlgorithm(result);
-	    		System.out.println("Press any key to return...");
+	    		System.out.println("Press enter to return...");
 	    		scanner.nextLine();
 	    		break;
 	    	case "5":
-	    		System.out.println("Returning to Previous Menu");
+	    		System.out.println("Returning to Previous Menu. Pls press enter...");
+	    		scanner.nextLine();
                 return;
 	    	default:
-	    		System.out.println("Invalid Option, Please Try Again!");
+	    		System.out.println("Invalid Option, Please Enter a Number (1-5)");
+	    		scanner.nextLine();
             }
         }
     }

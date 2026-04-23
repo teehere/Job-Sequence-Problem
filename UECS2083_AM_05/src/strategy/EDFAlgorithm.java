@@ -12,12 +12,12 @@ public class EDFAlgorithm extends AbstractDeliveryStrategy<Delivery> {
 	@Override
     public void schedule(List<Delivery> delivery) {
 		
-		// Step 1: clear previous result - O(1)
+		// clear previous result - O(1)
 		selected.clear();
         unselected.clear();
         totalProfit = 0;       
         
-        // Step 2: PriorityQueue automatically sorts by deadline - O(n log n)
+        // PriorityQueue automatically sorts by deadline - O(n log n)
         PriorityQueue<Delivery> queue = new PriorityQueue<>((a, b) -> {
             int deadlineCompare = Integer.compare(a.getDeadline(), b.getDeadline());
             if (deadlineCompare != 0) return deadlineCompare;
@@ -26,10 +26,10 @@ public class EDFAlgorithm extends AbstractDeliveryStrategy<Delivery> {
         });
         queue.addAll(delivery);  // Each add is O(log n), repeated n times
         
-        // Step 3: Initialize time - O(1)
+        // Initialize time - O(1)
         int currentTime = 1; // start at day 1
         
-        // Step 4: Process jobs in priority order - O(n log n)
+        // Process jobs in priority order - O(n log n)
         while (!queue.isEmpty()) {
             Delivery d = queue.poll();  // O(log n) per removal
             

@@ -75,7 +75,7 @@ import java.time.format.DateTimeFormatter;
         System.out.println("-".repeat(130));
         
         for (Delivery d : deliveries) {
-            System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
+            System.out.printf("%-12s | %-15s | %-18s | %-20s(%3d) | %-10.2f | %-15d | %-8.2f\n",
                 d.getDeliveryId(),
                 d.getItem(),
                 d.getOrderDate().format(fmt), 
@@ -98,17 +98,22 @@ import java.time.format.DateTimeFormatter;
 	    System.out.println("-".repeat(130));
 	   
 	    double total = 0;
-	    for (Delivery d : selected) {	        
-	        System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
-	                d.getDeliveryId(),
-	                d.getItem(),
-	        		d.getOrderDate().format(fmt),
-	                d.getDeadlineDate().format(fmt),
-	                d.getDeadline(), // day difference
-	                d.getSales(),
-	        		d.getQuantity(),
-	                d.getProfit());
-	        total += d.getProfit();
+	    
+	    if (selected.isEmpty()) {
+            System.out.println("No selected deliveries");
+	    } else {
+		    for (Delivery d : selected) {	        
+		        System.out.printf("%-12s | %-15s | %-18s | %-20s(%3d) | %-10.2f | %-15d | %-8.2f\n",
+		                d.getDeliveryId(),
+		                d.getItem(),
+		        		d.getOrderDate().format(fmt),
+		                d.getDeadlineDate().format(fmt),
+		                d.getDeadline(), // day difference
+		                d.getSales(),
+		        		d.getQuantity(),
+		                d.getProfit());
+		        total += d.getProfit();
+		    }
 	    }
 	
 	    System.out.println("=".repeat(130));
@@ -130,10 +135,10 @@ import java.time.format.DateTimeFormatter;
         double totalLost = 0;
 
         if (unselected.isEmpty()) {
-            System.out.println("No unselected deliveries.");
+            System.out.println("No unselected deliveries");
         } else {
             for (Delivery d : unselected) {
-                System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
+                System.out.printf("%-12s | %-15s | %-18s | %-20s(%3d) | %-10.2f | %-15d | %-8.2f\n",
                         d.getDeliveryId(),
                         d.getItem(),
                         d.getOrderDate().format(fmt),
@@ -199,16 +204,20 @@ import java.time.format.DateTimeFormatter;
  				"DeliveryID", "Item", "Order Date", "Deadline", "Sales(RM)", "Quantity(unit)", "Profit(RM)");
  		System.out.println("-".repeat(130));
 
- 		for (Delivery d : selected) {
- 			System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
- 					d.getDeliveryId(),
- 					d.getItem(),
- 					d.getOrderDate().format(fmt),
- 					d.getDeadlineDate().format(fmt),
- 					d.getDeadline(), // day difference
- 					d.getSales(),
- 					d.getQuantity(),
- 					d.getProfit());
+ 		if (selected.isEmpty()) {
+            System.out.println("No selected deliveries");
+ 		} else {
+	 		for (Delivery d : selected) {
+	 			System.out.printf("%-12s | %-15s | %-18s | %-20s(%3d) | %-10.2f | %-15d | %-8.2f\n",
+	 					d.getDeliveryId(),
+	 					d.getItem(),
+	 					d.getOrderDate().format(fmt),
+	 					d.getDeadlineDate().format(fmt),
+	 					d.getDeadline(), // day difference
+	 					d.getSales(),
+	 					d.getQuantity(),
+	 					d.getProfit());
+	 		}
  		}
 
  		System.out.println("=".repeat(130));
@@ -219,16 +228,20 @@ import java.time.format.DateTimeFormatter;
  				"DeliveryID", "Item", "Order Date", "Deadline", "Sales(RM)", "Quantity(unit)", "Profit(RM)");
  		System.out.println("-".repeat(130));
 
- 		for (Delivery d : unselected) {
- 			System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
- 					d.getDeliveryId(),
- 					d.getItem(),
- 					d.getOrderDate().format(fmt),
- 					d.getDeadlineDate().format(fmt),
- 					d.getDeadline(), // day difference
- 					d.getSales(),
- 					d.getQuantity(),
- 					d.getProfit());
+ 		if (unselected.isEmpty()) {
+            System.out.println("No unselected deliveries");
+ 		} else {
+	 		for (Delivery d : unselected) {
+	 			System.out.printf("%-12s | %-15s | %-18s | %-20s(%3d) | %-10.2f | %-15d | %-8.2f\n",
+	 					d.getDeliveryId(),
+	 					d.getItem(),
+	 					d.getOrderDate().format(fmt),
+	 					d.getDeadlineDate().format(fmt),
+	 					d.getDeadline(), // day difference
+	 					d.getSales(),
+	 					d.getQuantity(),
+	 					d.getProfit());
+	 		}
  		}
 
  		System.out.println("=".repeat(130));
@@ -263,40 +276,6 @@ import java.time.format.DateTimeFormatter;
  	    System.out.println("Algorithm : " + best);
  	    System.out.printf("Profit    : %.2f\n", bestProfit);
  	    System.out.println("Time (ms) : " + bestTime);
- 	
- 	
- 	
  	}
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
  	
 }
