@@ -105,7 +105,7 @@ DeliverySchedulingSystem/
 │   │   ├── DeliveryStrategy.java
 │   │   ├── AbstractDeliveryStrategy.java
 │   │   ├── GreedyAlgorithm.java
-│   │   ├── TaskPriorityAlgorithm.java
+│   │   ├── TPSWeightedAlgorithm.java
 │   │   ├── DPAlgorithm.java
 │   │   └── EDFAlgorithm.java
 │   │
