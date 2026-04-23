@@ -50,7 +50,7 @@ With limited resources (single driver/vehicle), the company must select orders a
 ## Algorithms Implemented
 | Algorithm | Time Complexity |
 |-----------|-----------------|
-| **Greedy Algorithm** | O(n^2) |  
+| **Greedy Algorithm** | $O(n^2)$ |  
 | **Task Priority Scheduling (Weighted)** | O(n log n) |  
 | **Dynamic Programming** | O(n*D) |  
 | **Earliest Deadline First (EDF)** |  O(n log n) | 
@@ -59,7 +59,7 @@ With limited resources (single driver/vehicle), the company must select orders a
 | Aspect | Greedy Algorithm | Task Priority Scheduling (Weighted) | Dynamic Programming | Earliest Deadline First (EDF) | 
 |-----------|-----------------|------------------|------------------|------------------|
 | **Core Strategy** | Highest profit first | Highest profit first with deadline-based scheduling | Break complex problem into subproblems and solve the subproblems | Earliest deadline first |
-| **Time Complexity** | O(n^2) | O(n log n + n*d) | O(n*D)| O(n log n)|
+| **Time Complexity** | $O(n^2)$ | O(n log n + n*d) | O(n*D)| O(n log n)|
 | **Deadline Guarantee** | No | Partial | Yes | Yes |
 | **Profit Maximizied** | Yes | Yes | Yes | No |
 | **Scalability** | Poor | Moderate | Moderate | Excellent |
