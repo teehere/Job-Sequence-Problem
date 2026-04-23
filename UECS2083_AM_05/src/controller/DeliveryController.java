@@ -87,7 +87,7 @@ public class DeliveryController {
             
             switch (option) {
 			case "1":
-				// new catherine(delivery);
+				return new TPSWeightedAlgorithm(delveries);
 			case "2":
 				return new GreedyAlgorithm(deliveries);
 			case "3":
@@ -116,7 +116,7 @@ public class DeliveryController {
 	    		break;
 
 	    	case "2":
-	    		// unselected (potential profit lost/reason why unselected/suggestion/deadline analysis...)
+	    		view.displayUnselectedSequence(strategy.getUnselected());
 	    		System.out.println("Press any key to return...");
 	    		scanner.nextLine();
 	    		break;
