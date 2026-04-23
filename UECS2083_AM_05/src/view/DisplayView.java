@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter;
 		System.out.println("=".repeat(50));
 		System.out.println(" ".repeat(16) + "SELECT ALGORITHMS");
 		System.out.println("=".repeat(50));
-		System.out.println("<1> ");
+		System.out.println("<1> Task Priority Scheduling (Weighted) Algorithm");
 		System.out.println("<2> Greedy Algorithm");
 		System.out.println("<3> Dynamic Programming Algorithm(DP)");
 		System.out.println("<4> Earliest Deadline First Algorithm (EDF)");
@@ -114,6 +114,41 @@ import java.time.format.DateTimeFormatter;
 	    System.out.println("=".repeat(130));
 	    System.out.printf("TOTAL PROFIT: %.2f\n", total);
 
+    }
+
+	// display unselected jobs
+    public void displayUnselectedSequence(List<Delivery> unselected) {
+        
+        System.out.println("=".repeat(130));
+        System.out.println(" ".repeat(55) + "UNSELECTED DELIVERIES");
+        System.out.println("=".repeat(130));
+        
+        System.out.printf("%-12s | %-15s | %-18s | %-24s | %-10s | %-15s | %-8s\n", 
+                "DeliveryID", "Item", "Order Date", "Deadline", "Sales(RM)", "Quantity(unit)", "Profit(RM)");
+        System.out.println("-".repeat(130));
+
+        double totalLost = 0;
+
+        if (unselected.isEmpty()) {
+            System.out.println("No unselected deliveries.");
+        } else {
+            for (Delivery d : unselected) {
+                System.out.printf("%-12s | %-15s | %-18s | %-20s(%02d) | %-10.2f | %-15d | %-8.2f\n",
+                        d.getDeliveryId(),
+                        d.getItem(),
+                        d.getOrderDate().format(fmt),
+                        d.getDeadlineDate().format(fmt),
+                        d.getDeadline(),
+                        d.getSales(),
+                        d.getQuantity(),
+                        d.getProfit());
+
+                totalLost += d.getProfit();
+            }
+        }
+
+        System.out.println("=".repeat(130));
+        System.out.printf("TOTAL PROFIT LOST: %.2f\n", totalLost);
     }
     
 	// display summary
