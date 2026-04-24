@@ -1,4 +1,4 @@
-# Job-Sequence-Problem
+# Logistic and Delivery Scheduling System
 
 ## Overview
 This project implements a **Delivery Scheduling System** that solves the **Job Sequencing Problem** for an e-commerce/logistics company. <br />
